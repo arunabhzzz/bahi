@@ -1,0 +1,7 @@
+docs/evidence/
+package-lock.json
+node_modules/
+dist/
+data/
+playwright-report/
+test-results/

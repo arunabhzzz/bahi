@@ -1,0 +1,54 @@
+{
+  "name": "bahi",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "build": "vite build --config apps/web/vite.config.ts",
+    "dev": "tsx --env-file-if-exists=.env apps/server/src/index.ts",
+    "test:e2e": "playwright test",
+    "lint": "prettier --check apps packages tests scripts *.ts *.json docs README.md",
+    "format": "prettier --write apps packages tests scripts *.ts *.json docs README.md",
+    "test:unit": "vitest run tests/money.test.ts tests/names.test.ts tests/parser.test.ts tests/summary.test.ts tests/boundaries.test.ts tests/timezone.test.ts tests/provider.test.ts tests/provider-enabled.test.ts",
+    "test:integration": "vitest run tests/ledger.test.ts tests/sales.test.ts tests/purchase.test.ts tests/correction.test.ts tests/corrections.test.ts tests/historical.test.ts tests/allocations.test.ts tests/receiving.test.ts tests/seed.test.ts tests/insights.test.ts tests/conversation.test.ts tests/backup.test.ts tests/setup.test.ts tests/discard.test.ts tests/retry.test.ts",
+    "test:contract": "vitest run tests/mcp.test.ts tests/tools.test.ts tests/mcp-malformed.test.ts",
+    "test:security": "vitest run tests/security.test.ts tests/rate-limit.test.ts tests/hosts.test.ts tests/confirmation-binding.test.ts tests/independent-review.test.ts",
+    "test:property": "vitest run tests/planning.test.ts tests/planning-constraints.test.ts tests/property.test.ts",
+    "start": "NODE_ENV=production tsx --env-file-if-exists=.env apps/server/src/index.ts",
+    "db:backup": "tsx scripts/database.ts backup",
+    "db:restore": "tsx scripts/database.ts restore",
+    "demo:seed": "tsx scripts/seed-demo.ts",
+    "verify:local": "tsx scripts/verify-local.ts",
+    "check:mcp": "tsx scripts/check-mcp.ts"
+  },
+  "packageManager": "npm@11.19.0",
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "express": "5.3.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0",
+    "@types/express": "5.0.6",
+    "@types/node": "26.6.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "fast-check": "4.10.2",
+    "prettier": "3.9.9",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.3"
+  }
+}

@@ -1,0 +1,12 @@
+# Actual implementation friction / SDK feedback
+
+Only observations from this implementation, not invented product trials.
+
+1. **SDK stateless GET behavior:** the first real contract test hung for 15 seconds while awaiting a standalone GET stream. Stateless configuration by itself did not supply the intended “no standalone SSE” behavior. The application now deliberately returns 405/Allow: POST for non-POST requests. Official SDK POST initialization/list/call still handles the protocol. Documenting this distinction prominently would prevent a misleading assumption that stateless implies GET disabled.
+2. **TypeScript tool callbacks:** inferred text content widened to `string`, failing the official SDK's literal `"text"` content union during typecheck. Explicit literal typing resolved the compile error; real SDK calls still pass. This is type integration friction, not an SDK runtime bug claim.
+3. **Historical repair regression:** a test-first correction slice initially recalculated with today's catalogue price. A dedicated red regression proved the wrong total after price updates. Corrections now restore historical line prices before building their replacement and preserve original business dates.
+4. **Reload scenario friction:** inspection of actual E2E screenshots showed a saved scenario still presented as saveable after reload. A red conversation regression now requires the saved scenario to clear from active context. The persisted draft remains on the shelf.
+5. **Lost response:** a browser test aborted the confirmation response after the backend committed. Initially no recovery action existed. Persisted request keys/bound operation IDs and “Retry same request” now recover without another stock effect, including refresh mid-preview.
+6. **Tooling:** pnpm was unavailable; npm workspaces are used. Docker was not installed, so container execution is not claimed. npm package threat-intelligence checks timed out in the tool wrapper during dependency installation; this was incomplete verification, not evidence of malicious packages. npm audit reported zero vulnerabilities at installation. esbuild install-script approval warning was recorded; actual Vite build and tests worked.
+
+No real user observation, transcription accuracy, competitor result or business-impact metric is included. Product-feedback submission remains pending approval and actual native product use; this log must not be represented as Alexa certification feedback.
